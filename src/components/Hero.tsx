@@ -10,21 +10,71 @@ const Hero = () => {
     }
   };
 
+  // Code symbols and tech elements for background animation
+  const codeElements = [
+    '<>', '</>', '{}', '[]', '()', '=>', '&&', '||', '!=', '==', '++', '--',
+    'fn', 'if', 'for', 'var', 'let', 'const', 'return', 'import', 'export',
+    '0', '1', '0', '1', '0', '1', '0', '1', 'JS', 'TS', 'CSS', 'HTML',
+    '&lt;/&gt;', 'API', 'npm', 'git', 'src', 'div', 'css', 'jsx'
+  ];
+
   return (
     <section id="hero" className="min-h-screen flex items-center justify-center relative pt-20">
-      {/* Background particles effect */}
+      {/* Background code particles effect */}
       <div className="absolute inset-0 overflow-hidden">
-        {[...Array(30)].map((_, i) => (
+        {[...Array(40)].map((_, i) => {
+          const element = codeElements[i % codeElements.length];
+          const isBinary = element === '0' || element === '1';
+          const isSymbol = ['<>', '</>', '{}', '[]', '()', '=>'].includes(element);
+          
+          return (
+            <div
+              key={i}
+              className={`absolute text-xs font-mono animate-pulse ${
+                isBinary 
+                  ? 'text-green-500/30' 
+                  : isSymbol 
+                    ? 'text-purple-500/40' 
+                    : 'text-blue-500/30'
+              } select-none pointer-events-none`}
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 3}s`,
+                animationDuration: `${3 + Math.random() * 4}s`,
+                transform: `rotate(${Math.random() * 360}deg)`,
+                fontSize: `${0.7 + Math.random() * 0.6}rem`,
+              }}
+            >
+              {element}
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Floating geometric shapes */}
+      <div className="absolute inset-0 overflow-hidden">
+        {[...Array(8)].map((_, i) => (
           <div
-            key={i}
-            className="absolute w-0.5 h-0.5 bg-purple-600 rounded-full animate-pulse opacity-40"
+            key={`shape-${i}`}
+            className="absolute animate-float opacity-20"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 2}s`,
-              animationDuration: `${2 + Math.random() * 3}s`,
+              animationDelay: `${Math.random() * 5}s`,
+              animationDuration: `${8 + Math.random() * 4}s`,
             }}
-          />
+          >
+            <div 
+              className={`w-2 h-2 ${
+                i % 3 === 0 
+                  ? 'bg-purple-600/20 rotate-45' 
+                  : i % 3 === 1 
+                    ? 'bg-blue-600/20 rounded-full' 
+                    : 'bg-green-600/20'
+              }`} 
+            />
+          </div>
         ))}
       </div>
 
