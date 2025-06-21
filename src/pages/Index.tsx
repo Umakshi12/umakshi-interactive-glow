@@ -23,9 +23,9 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white relative overflow-x-hidden">
+    <div className="min-h-screen bg-black text-white relative overflow-x-hidden">
       {/* Animated background */}
-      <div className="fixed inset-0 bg-gradient-to-br from-purple-900/20 via-gray-900 to-cyan-900/20 animate-pulse" />
+      <div className="fixed inset-0 bg-gradient-to-br from-purple-950/10 via-black to-blue-950/10" />
       
       {/* Cursor follower */}
       <CursorFollower mousePosition={mousePosition} />

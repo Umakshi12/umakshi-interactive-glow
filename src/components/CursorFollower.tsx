@@ -17,7 +17,7 @@ const CursorFollower: React.FC<CursorFollowerProps> = ({ mousePosition }) => {
           transform: 'translate(-50%, -50%)',
         }}
       >
-        <div className="w-5 h-5 bg-gradient-to-r from-purple-400 to-cyan-400 rounded-full opacity-60 animate-pulse" />
+        <div className="w-4 h-4 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full opacity-30 animate-pulse" />
       </div>
       
       {/* Trailing effect */}
@@ -29,7 +29,7 @@ const CursorFollower: React.FC<CursorFollowerProps> = ({ mousePosition }) => {
           transform: 'translate(-50%, -50%)',
         }}
       >
-        <div className="w-10 h-10 border-2 border-purple-400/30 rounded-full animate-spin" />
+        <div className="w-8 h-8 border border-purple-600/20 rounded-full animate-spin" />
       </div>
     </>
   );

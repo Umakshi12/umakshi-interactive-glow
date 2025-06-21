@@ -34,7 +34,7 @@ const Header = () => {
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled 
-          ? 'bg-gray-900/80 backdrop-blur-lg border-b border-purple-500/20' 
+          ? 'bg-black/90 backdrop-blur-lg border-b border-purple-800/20' 
           : 'bg-transparent'
       }`}
     >
@@ -43,7 +43,7 @@ const Header = () => {
           {/* Logo */}
           <div 
             onClick={() => scrollToSection('hero')}
-            className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent cursor-pointer hover:scale-105 transition-transform"
+            className="text-2xl font-bold bg-gradient-to-r from-purple-300 to-blue-300 bg-clip-text text-transparent cursor-pointer hover:scale-105 transition-transform"
           >
             Umakshi
           </div>
@@ -54,10 +54,10 @@ const Header = () => {
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className="relative text-gray-300 hover:text-white transition-colors group"
+                className="relative text-gray-400 hover:text-white transition-colors group"
               >
                 {item.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-cyan-400 transition-all duration-300 group-hover:w-full" />
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-blue-400 transition-all duration-300 group-hover:w-full" />
               </button>
             ))}
           </div>
@@ -65,7 +65,7 @@ const Header = () => {
           {/* Mobile menu button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg border border-purple-500/30 hover:border-purple-400 transition-colors"
+            className="md:hidden p-2 rounded-lg border border-purple-800/30 hover:border-purple-600 transition-colors"
           >
             {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
@@ -73,12 +73,12 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
-          <div className="md:hidden mt-4 p-4 rounded-lg bg-gray-800/90 backdrop-blur-lg border border-purple-500/20">
+          <div className="md:hidden mt-4 p-4 rounded-lg bg-gray-950/90 backdrop-blur-lg border border-purple-800/20">
             {navItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className="block w-full text-left py-2 text-gray-300 hover:text-purple-400 transition-colors"
+                className="block w-full text-left py-2 text-gray-400 hover:text-purple-300 transition-colors"
               >
                 {item.label}
               </button>
