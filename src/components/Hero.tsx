@@ -73,17 +73,17 @@ const Hero = () => {
       </div>
 
       <div className="container mx-auto px-6 text-center relative z-10">
-        {/* Elegant profile section */}
+        {/* Enlarged elegant profile section */}
         <div className="mb-12 flex justify-center">
           <div className="relative">
-            <div className="w-48 h-48 rounded-full bg-gradient-to-br from-purple-600/20 to-blue-600/20 p-1 backdrop-blur-sm border border-purple-500/30">
+            <div className="w-72 h-72 md:w-80 md:h-80 rounded-full bg-gradient-to-br from-purple-600/20 to-blue-600/20 p-1.5 backdrop-blur-sm border border-purple-500/30">
               <div className="w-full h-full rounded-full bg-black/80 flex items-center justify-center backdrop-blur-sm">
-                <div className="w-40 h-40 rounded-full bg-gradient-to-br from-purple-900/30 to-blue-900/30 flex items-center justify-center text-5xl font-light text-purple-300/80 tracking-wider">
+                <div className="w-64 h-64 md:w-72 md:h-72 rounded-full bg-gradient-to-br from-purple-900/30 to-blue-900/30 flex items-center justify-center text-8xl md:text-9xl font-light text-purple-300/80 tracking-wider">
                   U
                 </div>
               </div>
             </div>
-            <div className="absolute -inset-6 bg-gradient-to-r from-purple-600/10 to-blue-600/10 rounded-full blur-2xl animate-pulse" />
+            <div className="absolute -inset-8 bg-gradient-to-r from-purple-600/10 to-blue-600/10 rounded-full blur-3xl animate-pulse" />
           </div>
         </div>
 
