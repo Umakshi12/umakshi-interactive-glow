@@ -9,6 +9,8 @@ import TechStack from '../components/TechStack';
 import Contact from '../components/Contact';
 import CursorFollower from '../components/CursorFollower';
 import AIChat from '../components/AIChat';
+import ThemeSwitcher from '../components/ThemeSwitcher';
+import ScrollProgress from '../components/ScrollProgress';
 
 const Index = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -27,8 +29,14 @@ const Index = () => {
       {/* Animated background */}
       <div className="fixed inset-0 bg-gradient-to-br from-purple-950/10 via-black to-blue-950/10" />
       
+      {/* Scroll progress indicator */}
+      <ScrollProgress />
+      
       {/* Cursor follower */}
       <CursorFollower mousePosition={mousePosition} />
+      
+      {/* Theme switcher */}
+      <ThemeSwitcher />
       
       {/* Header */}
       <Header />
