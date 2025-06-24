@@ -11,6 +11,8 @@ const ScrollProgress = () => {
     { id: 'experience', label: 'Experience' },
     { id: 'projects', label: 'Projects' },
     { id: 'techstack', label: 'Skills' },
+    { id: 'blog', label: 'Blog' },
+    { id: 'analytics', label: 'Analytics' },
     { id: 'contact', label: 'Contact' }
   ];
 

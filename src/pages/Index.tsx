@@ -6,11 +6,15 @@ import About from '../components/About';
 import Experience from '../components/Experience';
 import Projects from '../components/Projects';
 import TechStack from '../components/TechStack';
+import Blog from '../components/Blog';
+import Analytics from '../components/Analytics';
 import Contact from '../components/Contact';
 import CursorFollower from '../components/CursorFollower';
 import AIChat from '../components/AIChat';
 import ThemeSwitcher from '../components/ThemeSwitcher';
 import ScrollProgress from '../components/ScrollProgress';
+import Search from '../components/Search';
+import VoiceFeatures from '../components/VoiceFeatures';
 
 const Index = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -38,6 +42,12 @@ const Index = () => {
       {/* Theme switcher */}
       <ThemeSwitcher />
       
+      {/* Search component */}
+      <Search />
+      
+      {/* Voice features */}
+      <VoiceFeatures />
+      
       {/* Header */}
       <Header />
       
@@ -48,6 +58,8 @@ const Index = () => {
         <Experience />
         <Projects />
         <TechStack />
+        <Blog />
+        <Analytics />
         <Contact />
       </main>
       
