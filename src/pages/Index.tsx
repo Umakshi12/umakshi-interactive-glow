@@ -11,7 +11,6 @@ import Analytics from '../components/Analytics';
 import Contact from '../components/Contact';
 import CursorFollower from '../components/CursorFollower';
 import AIChat from '../components/AIChat';
-import ThemeSwitcher from '../components/ThemeSwitcher';
 import ScrollProgress from '../components/ScrollProgress';
 import Search from '../components/Search';
 import VoiceFeatures from '../components/VoiceFeatures';
@@ -38,9 +37,6 @@ const Index = () => {
       
       {/* Cursor follower */}
       <CursorFollower mousePosition={mousePosition} />
-      
-      {/* Theme switcher */}
-      <ThemeSwitcher />
       
       {/* Search component */}
       <Search />
