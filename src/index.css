@@ -48,11 +48,6 @@
     --sidebar-ring: 217.2 91.2% 50%;
 
     --radius: 0.5rem;
-
-    /* Theme-specific colors */
-    --theme-primary: rgb(147, 51, 234);
-    --theme-secondary: rgb(168, 85, 247);
-    --theme-accent: rgb(196, 181, 253);
   }
 }
 
@@ -86,7 +81,7 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    background: linear-gradient(to bottom, var(--theme-primary), var(--theme-secondary));
+    background: linear-gradient(to bottom, #9333ea, #a855f7);
     border-radius: 3px;
     opacity: 0.6;
   }
@@ -106,22 +101,6 @@
     font-weight: 300;
     letter-spacing: 0.05em;
     line-height: 1.6;
-  }
-
-  .theme-gradient {
-    background: linear-gradient(135deg, var(--theme-primary), var(--theme-secondary));
-  }
-
-  .theme-border {
-    border-color: var(--theme-primary);
-  }
-
-  .theme-text {
-    color: var(--theme-primary);
-  }
-
-  .theme-accent {
-    color: var(--theme-accent);
   }
 }
 
