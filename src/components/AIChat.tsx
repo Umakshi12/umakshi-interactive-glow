@@ -14,7 +14,7 @@ const AIChat = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: 1,
-      text: "Hi! I'm Umakshi's AI assistant. I can help answer questions about her experience, skills, and projects. You can type your question or use voice input. What would you like to know?",
+      text: "Hi! I'm Umakshi's AI assistant. I can help answer questions about her experience, skills, and projects. You can type your question or use voice input for both questions and navigation commands. What would you like to know?",
       isBot: true
     }
   ]);
@@ -61,10 +61,73 @@ const AIChat = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
+  const navigateToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleVoiceCommand = (input: string) => {
+    const command = input.toLowerCase();
+    console.log('Processing voice command:', command);
+
+    // Check for navigation commands first
+    if (command.includes('navigate to') || command.includes('go to') || command.includes('show')) {
+      if (command.includes('about')) {
+        navigateToSection('about');
+        return 'Navigating to About section';
+      } else if (command.includes('projects')) {
+        navigateToSection('projects');
+        return 'Showing my projects';
+      } else if (command.includes('skills') || command.includes('tech')) {
+        navigateToSection('techstack');
+        return 'Displaying my technical skills';
+      } else if (command.includes('contact')) {
+        navigateToSection('contact');
+        return 'Opening contact information';
+      } else if (command.includes('experience')) {
+        navigateToSection('experience');
+        return 'Showing my work experience';
+      } else if (command.includes('blog')) {
+        navigateToSection('blog');
+        return 'Opening my blog posts';
+      } else if (command.includes('home') || command.includes('top')) {
+        navigateToSection('hero');
+        return 'Going to the top of the page';
+      }
+    }
+    
+    // Direct navigation commands without "navigate to"
+    if (command.includes('about') && !command.includes('tell me about')) {
+      navigateToSection('about');
+      return 'Navigating to About section';
+    } else if (command.includes('projects') && !command.includes('tell me about')) {
+      navigateToSection('projects');
+      return 'Showing my projects';
+    }
+    
+    // Information commands
+    if (command.includes('introduce') || command.includes('who are you')) {
+      return 'Hi! I am Umakshi, a passionate full-stack developer with expertise in React, Node.js, and AI technologies. I love creating innovative web solutions and exploring new technologies.';
+    } else if (command.includes('read about')) {
+      return 'I am a dedicated software developer with experience in modern web technologies. I enjoy building user-friendly applications and exploring new technologies like AI and machine learning.';
+    }
+
+    // Return null if no navigation command was found, so regular chat response will be generated
+    return null;
+  };
+
   const generateBotResponse = (userInput: string): string => {
+    // First check if it's a voice command
+    const voiceCommandResponse = handleVoiceCommand(userInput);
+    if (voiceCommandResponse) {
+      return voiceCommandResponse;
+    }
+
+    // Regular chat responses
     const input = userInput.toLowerCase();
     
-    // Enhanced responses for better conversation
     if (input.includes('experience') || input.includes('work')) {
       return "Umakshi has extensive experience in full-stack development, working with React, Node.js, TypeScript, and modern web technologies. She has built scalable applications and has expertise in both frontend and backend development.";
     } else if (input.includes('skills') || input.includes('tech') || input.includes('technology')) {
@@ -78,9 +141,9 @@ const AIChat = () => {
     } else if (input.includes('ai') || input.includes('artificial intelligence') || input.includes('machine learning')) {
       return "Umakshi has significant experience with AI and machine learning technologies. She has integrated AI features into web applications, worked with various ML models, and is passionate about leveraging AI to create innovative solutions.";
     } else if (input.includes('hello') || input.includes('hi') || input.includes('hey')) {
-      return "Hello! I'm here to help you learn more about Umakshi's professional background, skills, and projects. Feel free to ask me anything about her experience, technical expertise, or work samples.";
+      return "Hello! I'm here to help you learn more about Umakshi's professional background, skills, and projects. You can also use voice commands like 'navigate to about' or 'show projects' to navigate the portfolio. Feel free to ask me anything!";
     } else {
-      return `Thank you for asking "${userInput}". Umakshi is a passionate full-stack developer with expertise in React, Node.js, and AI integration. She loves creating innovative web solutions and is always eager to take on new challenges. Would you like to know more about her specific skills, projects, or experience?`;
+      return `Thank you for asking "${userInput}". Umakshi is a passionate full-stack developer with expertise in React, Node.js, and AI integration. She loves creating innovative web solutions and is always eager to take on new challenges. You can also try voice commands like 'navigate to projects' or 'show skills' to explore the portfolio. Would you like to know more about her specific skills, projects, or experience?`;
     }
   };
 
@@ -182,8 +245,8 @@ const AIChat = () => {
           <div className="p-4 border-b border-purple-500/20">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="text-white font-semibold">Chat with Umakshi's AI</h3>
-                <p className="text-gray-400 text-sm">Type or speak your questions</p>
+                <h3 className="text-white font-semibold">Voice AI Assistant</h3>
+                <p className="text-gray-400 text-sm">Chat & navigate with voice</p>
               </div>
               <div className="flex items-center space-x-2">
                 {/* Voice toggle */}
@@ -245,10 +308,13 @@ const AIChat = () => {
           {/* Input */}
           <form onSubmit={handleSendMessage} className="p-4 border-t border-purple-500/20">
             {isListening && (
-              <div className="mb-2 p-2 bg-red-600/20 border border-red-500/30 rounded-lg text-center">
+              <div className="mb-2 p-2 bg-red-600/20 border border-red-500/30 rounded-lg">
                 <div className="flex items-center justify-center space-x-2 text-red-400 text-sm">
                   <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
                   <span>Listening... Speak now</span>
+                </div>
+                <div className="mt-2 text-xs text-gray-400 text-center">
+                  Try: "Navigate to projects" or "Tell me about skills"
                 </div>
               </div>
             )}
@@ -258,7 +324,7 @@ const AIChat = () => {
                 type="text"
                 value={inputMessage}
                 onChange={(e) => setInputMessage(e.target.value)}
-                placeholder={isListening ? "Listening..." : "Type your message..."}
+                placeholder={isListening ? "Listening..." : "Type or speak your message..."}
                 disabled={isListening}
                 className="flex-1 px-3 py-2 bg-gray-800/50 border border-purple-500/30 rounded-lg text-white placeholder-gray-400 focus:border-purple-400 focus:outline-none text-sm disabled:opacity-50"
               />
@@ -291,7 +357,7 @@ const AIChat = () => {
             
             {recognition && voiceEnabled && (
               <p className="text-xs text-gray-500 mt-2 text-center">
-                Click the mic to speak, or type your message
+                Voice commands: "Navigate to [section]" or ask questions
               </p>
             )}
           </form>

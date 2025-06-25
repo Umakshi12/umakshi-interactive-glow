@@ -13,7 +13,6 @@ import CursorFollower from '../components/CursorFollower';
 import AIChat from '../components/AIChat';
 import ScrollProgress from '../components/ScrollProgress';
 import Search from '../components/Search';
-import VoiceFeatures from '../components/VoiceFeatures';
 
 const Index = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -41,9 +40,6 @@ const Index = () => {
       {/* Search component */}
       <Search />
       
-      {/* Voice features */}
-      <VoiceFeatures />
-      
       {/* Header */}
       <Header />
       
@@ -59,7 +55,7 @@ const Index = () => {
         <Contact />
       </main>
       
-      {/* AI Chat */}
+      {/* AI Chat with integrated voice features */}
       <AIChat />
     </div>
   );
