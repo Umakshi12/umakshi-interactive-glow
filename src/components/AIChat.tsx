@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
-import { MessageCircle, X, Send, Mic, MicOff, Volume2, VolumeX } from 'lucide-react';
+import { X, Send, Mic, MicOff, Volume2, VolumeX } from 'lucide-react';
+import ActionFigure3D from './ActionFigure3D';
 
 interface Message {
   id: number;
@@ -230,12 +231,17 @@ const AIChat = () => {
 
   return (
     <>
-      {/* Chat toggle button */}
+      {/* Chat toggle button with 3D action figure */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 z-50 p-4 bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-500 hover:to-cyan-500 text-white rounded-full shadow-2xl hover:scale-110 transition-all duration-300 hover:shadow-purple-500/25"
+        className="fixed bottom-6 right-6 z-50 p-2 bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-500 hover:to-cyan-500 text-white rounded-full shadow-2xl hover:scale-110 transition-all duration-300 hover:shadow-purple-500/25 overflow-hidden"
+        style={{ width: '80px', height: '80px' }}
       >
-        {isOpen ? <X size={24} /> : <MessageCircle size={24} />}
+        {isOpen ? (
+          <X size={24} className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10" />
+        ) : (
+          <ActionFigure3D size={76} isAnimated={true} className="absolute inset-0" />
+        )}
       </button>
 
       {/* Chat window */}
@@ -244,9 +250,12 @@ const AIChat = () => {
           {/* Chat header */}
           <div className="p-4 border-b border-purple-500/20">
             <div className="flex items-center justify-between">
-              <div>
-                <h3 className="text-white font-semibold">Voice AI Assistant</h3>
-                <p className="text-gray-400 text-sm">Chat & navigate with voice</p>
+              <div className="flex items-center space-x-3">
+                <ActionFigure3D size={40} isAnimated={false} />
+                <div>
+                  <h3 className="text-white font-semibold">Umakshi AI Assistant</h3>
+                  <p className="text-gray-400 text-sm">Chat & navigate with voice</p>
+                </div>
               </div>
               <div className="flex items-center space-x-2">
                 {/* Voice toggle */}
