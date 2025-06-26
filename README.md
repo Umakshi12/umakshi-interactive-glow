@@ -1,73 +1,119 @@
-# Welcome to your Lovable project
 
-## Project info
+# Umakshi's Portfolio Website
 
-**URL**: https://lovable.dev/projects/b9db3faf-dd47-4775-ad4c-d56751fe2c9f
+A modern, interactive portfolio website built with React and 3D elements.
 
-## How can I edit this code?
+## 🚀 How to Run This Website on Your Computer
 
-There are several ways of editing your application.
+Follow these simple steps to get the website running on your local machine:
 
-**Use Lovable**
+### Step 1: Install Node.js
+1. Go to [nodejs.org](https://nodejs.org/)
+2. Download the **LTS version** (recommended for most users)
+3. Run the installer and follow the setup wizard
+4. Keep all default settings during installation
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/b9db3faf-dd47-4775-ad4c-d56751fe2c9f) and start prompting.
+### Step 2: Download the Code
+1. Click the green "Code" button on this page
+2. Select "Download ZIP"
+3. Extract the ZIP file to a folder on your computer (like Desktop or Documents)
+4. Remember where you saved it!
 
-Changes made via Lovable will be committed automatically to this repo.
+### Step 3: Open Command Prompt/Terminal
+**On Windows:**
+- Press `Windows Key + R`
+- Type `cmd` and press Enter
 
-**Use your preferred IDE**
+**On Mac:**
+- Press `Command + Space`
+- Type `Terminal` and press Enter
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+**On Linux:**
+- Press `Ctrl + Alt + T`
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### Step 4: Navigate to Your Project Folder
+In the command prompt/terminal, type:
+```bash
+cd path/to/your/extracted/folder
+```
 
-Follow these steps:
+**Example:**
+- If you saved it to Desktop: `cd Desktop/umakshi-interactive-glow-main`
+- If you saved it to Documents: `cd Documents/umakshi-interactive-glow-main`
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+**💡 Tip:** You can drag and drop the folder into the terminal window to get the correct path!
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+### Step 5: Install Dependencies
+Copy and paste this command, then press Enter:
+```bash
+npm install
+```
 
-# Step 3: Install the necessary dependencies.
-npm i
+Wait for it to finish (this might take a few minutes). You'll see lots of text scrolling - this is normal!
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+### Step 6: Start the Website
+Copy and paste this command, then press Enter:
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+### Step 7: View Your Website
+1. Look for a message like: `Local: http://localhost:5173/`
+2. Hold `Ctrl` (or `Cmd` on Mac) and click on the link
+3. Your website will open in your default browser!
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## 🎉 You Did It!
 
-**Use GitHub Codespaces**
+Your website is now running! You can:
+- View it at `http://localhost:5173/`
+- Make changes to the code and see them update automatically
+- Stop the website by pressing `Ctrl + C` in the terminal
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## 🔧 Troubleshooting
 
-## What technologies are used for this project?
+**Problem: Command not found**
+- Make sure Node.js is properly installed
+- Restart your terminal and try again
 
-This project is built with:
+**Problem: Permission errors**
+- On Mac/Linux, try adding `sudo` before the command: `sudo npm install`
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+**Problem: Port already in use**
+- Try a different port: `npm run dev -- --port 3000`
 
-## How can I deploy this project?
+**Problem: Website won't load**
+- Make sure you're using the correct URL shown in the terminal
+- Try refreshing the browser page
 
-Simply open [Lovable](https://lovable.dev/projects/b9db3faf-dd47-4775-ad4c-d56751fe2c9f) and click on Share -> Publish.
+## 📁 Project Structure
 
-## Can I connect a custom domain to my Lovable project?
+```
+umakshi-interactive-glow/
+├── src/                    # Source code
+│   ├── components/         # React components
+│   ├── pages/             # Website pages
+│   └── styles/            # Styling files
+├── public/                # Static files
+├── package.json           # Project dependencies
+└── README.md             # This file!
+```
 
-Yes, you can!
+## 🛠 Built With
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+- **React** - For building the user interface
+- **TypeScript** - For better code quality
+- **Tailwind CSS** - For styling
+- **Three.js** - For 3D graphics
+- **Vite** - For fast development
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+## 📝 Need Help?
+
+If you run into any issues:
+1. Make sure you followed all steps in order
+2. Check that Node.js is properly installed: `node --version`
+3. Try deleting the `node_modules` folder and running `npm install` again
+4. Search for your specific error message online
+
+---
+
+**Happy coding! 🎨✨**
