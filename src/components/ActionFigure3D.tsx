@@ -89,11 +89,13 @@ const ActionFigureModel = ({ isAnimated = false }: { isAnimated?: boolean }) => 
 const ActionFigure3D = ({ 
   size = 60, 
   isAnimated = false, 
-  className = "" 
+  className = "",
+  onError
 }: { 
   size?: number; 
   isAnimated?: boolean; 
-  className?: string; 
+  className?: string;
+  onError?: () => void;
 }) => {
   const [hasError, setHasError] = useState(false);
 
@@ -101,6 +103,13 @@ const ActionFigure3D = ({
     // Reset error state when component remounts
     setHasError(false);
   }, []);
+
+  useEffect(() => {
+    // Call onError callback when error occurs
+    if (hasError && onError) {
+      onError();
+    }
+  }, [hasError, onError]);
 
   if (hasError) {
     // Fallback to a simple colored circle if 3D fails
