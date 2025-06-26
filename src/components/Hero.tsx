@@ -73,14 +73,16 @@ const Hero = () => {
       </div>
 
       <div className="container mx-auto px-6 text-center relative z-10">
-        {/* Enlarged elegant profile section */}
+        {/* Enlarged elegant profile section with actual image */}
         <div className="mb-12 flex justify-center">
           <div className="relative">
             <div className="w-72 h-72 md:w-80 md:h-80 rounded-full bg-gradient-to-br from-purple-600/20 to-blue-600/20 p-1.5 backdrop-blur-sm border border-purple-500/30">
-              <div className="w-full h-full rounded-full bg-black/80 flex items-center justify-center backdrop-blur-sm">
-                <div className="w-64 h-64 md:w-72 md:h-72 rounded-full bg-gradient-to-br from-purple-900/30 to-blue-900/30 flex items-center justify-center text-8xl md:text-9xl font-light text-purple-300/80 tracking-wider">
-                  U
-                </div>
+              <div className="w-full h-full rounded-full bg-black/20 flex items-center justify-center backdrop-blur-sm overflow-hidden">
+                <img 
+                  src="/lovable-uploads/7a5d3d93-5d6b-45d6-9f17-7c1615d95838.png" 
+                  alt="Umakshi - AI Scientist"
+                  className="w-full h-full object-cover rounded-full"
+                />
               </div>
             </div>
             <div className="absolute -inset-8 bg-gradient-to-r from-purple-600/10 to-blue-600/10 rounded-full blur-3xl animate-pulse" />
