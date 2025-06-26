@@ -1,6 +1,5 @@
-
 import React, { useState, useEffect, useRef } from 'react';
-import { X, Send, Mic, MicOff, Volume2, VolumeX } from 'lucide-react';
+import { X, Send, Mic, MicOff, Volume2, VolumeX, MessageCircle } from 'lucide-react';
 import ActionFigure3D from './ActionFigure3D';
 
 interface Message {
@@ -24,6 +23,7 @@ const AIChat = () => {
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [recognition, setRecognition] = useState<any>(null);
   const [voiceEnabled, setVoiceEnabled] = useState(true);
+  const [figureError, setFigureError] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // Initialize speech recognition
@@ -40,7 +40,6 @@ const AIChat = () => {
         const transcript = event.results[0][0].transcript;
         setInputMessage(transcript);
         setIsListening(false);
-        // Auto-send voice input
         handleSendMessage(null, transcript, true);
       };
 
@@ -73,7 +72,6 @@ const AIChat = () => {
     const command = input.toLowerCase();
     console.log('Processing voice command:', command);
 
-    // Check for navigation commands first
     if (command.includes('navigate to') || command.includes('go to') || command.includes('show')) {
       if (command.includes('about')) {
         navigateToSection('about');
@@ -99,7 +97,6 @@ const AIChat = () => {
       }
     }
     
-    // Direct navigation commands without "navigate to"
     if (command.includes('about') && !command.includes('tell me about')) {
       navigateToSection('about');
       return 'Navigating to About section';
@@ -108,25 +105,21 @@ const AIChat = () => {
       return 'Showing my projects';
     }
     
-    // Information commands
     if (command.includes('introduce') || command.includes('who are you')) {
       return 'Hi! I am Umakshi, a passionate full-stack developer with expertise in React, Node.js, and AI technologies. I love creating innovative web solutions and exploring new technologies.';
     } else if (command.includes('read about')) {
       return 'I am a dedicated software developer with experience in modern web technologies. I enjoy building user-friendly applications and exploring new technologies like AI and machine learning.';
     }
 
-    // Return null if no navigation command was found, so regular chat response will be generated
     return null;
   };
 
   const generateBotResponse = (userInput: string): string => {
-    // First check if it's a voice command
     const voiceCommandResponse = handleVoiceCommand(userInput);
     if (voiceCommandResponse) {
       return voiceCommandResponse;
     }
 
-    // Regular chat responses
     const input = userInput.toLowerCase();
     
     if (input.includes('experience') || input.includes('work')) {
@@ -151,7 +144,6 @@ const AIChat = () => {
   const speak = (text: string) => {
     if (!voiceEnabled || !('speechSynthesis' in window)) return;
     
-    // Cancel any ongoing speech
     window.speechSynthesis.cancel();
     
     const utterance = new SpeechSynthesisUtterance(text);
@@ -178,7 +170,6 @@ const AIChat = () => {
     const messageText = voiceInput || inputMessage;
     if (!messageText.trim()) return;
 
-    // Add user message
     const userMessage: Message = {
       id: messages.length + 1,
       text: messageText,
@@ -186,7 +177,6 @@ const AIChat = () => {
       isVoiceInput: isVoice
     };
 
-    // Generate bot response
     const botResponseText = generateBotResponse(messageText);
     const botResponse: Message = {
       id: messages.length + 2,
@@ -197,7 +187,6 @@ const AIChat = () => {
     setMessages(prev => [...prev, userMessage, botResponse]);
     setInputMessage('');
 
-    // If input was voice, provide voice output as well
     if (isVoice && voiceEnabled) {
       setTimeout(() => {
         speak(botResponseText);
@@ -231,7 +220,7 @@ const AIChat = () => {
 
   return (
     <>
-      {/* Chat toggle button with 3D action figure */}
+      {/* Chat toggle button with fallback for 3D figure */}
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="fixed bottom-6 right-6 z-50 p-2 bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-500 hover:to-cyan-500 text-white rounded-full shadow-2xl hover:scale-110 transition-all duration-300 hover:shadow-purple-500/25 overflow-hidden"
@@ -239,8 +228,15 @@ const AIChat = () => {
       >
         {isOpen ? (
           <X size={24} className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10" />
+        ) : figureError ? (
+          <MessageCircle size={32} className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10" />
         ) : (
-          <ActionFigure3D size={76} isAnimated={true} className="absolute inset-0" />
+          <ActionFigure3D 
+            size={76} 
+            isAnimated={true} 
+            className="absolute inset-0"
+            onError={() => setFigureError(true)}
+          />
         )}
       </button>
 
@@ -251,14 +247,19 @@ const AIChat = () => {
           <div className="p-4 border-b border-purple-500/20">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-3">
-                <ActionFigure3D size={40} isAnimated={false} />
+                {figureError ? (
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-600 to-cyan-600 flex items-center justify-center">
+                    <span className="text-white text-sm font-bold">U</span>
+                  </div>
+                ) : (
+                  <ActionFigure3D size={40} isAnimated={false} />
+                )}
                 <div>
                   <h3 className="text-white font-semibold">Umakshi AI Assistant</h3>
                   <p className="text-gray-400 text-sm">Chat & navigate with voice</p>
                 </div>
               </div>
               <div className="flex items-center space-x-2">
-                {/* Voice toggle */}
                 <button
                   onClick={toggleVoice}
                   className={`p-2 rounded-lg transition-colors ${
@@ -271,7 +272,6 @@ const AIChat = () => {
                   {voiceEnabled ? <Volume2 size={16} /> : <VolumeX size={16} />}
                 </button>
                 
-                {/* Stop speaking button */}
                 {isSpeaking && (
                   <button
                     onClick={stopSpeaking}
@@ -338,7 +338,6 @@ const AIChat = () => {
                 className="flex-1 px-3 py-2 bg-gray-800/50 border border-purple-500/30 rounded-lg text-white placeholder-gray-400 focus:border-purple-400 focus:outline-none text-sm disabled:opacity-50"
               />
               
-              {/* Voice input button */}
               {recognition && voiceEnabled && (
                 <button
                   type="button"
@@ -354,7 +353,6 @@ const AIChat = () => {
                 </button>
               )}
               
-              {/* Send button */}
               <button
                 type="submit"
                 disabled={isListening || (!inputMessage.trim())}
