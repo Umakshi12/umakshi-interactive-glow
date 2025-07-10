@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { X, Send, Mic, MicOff, Volume2, VolumeX, MessageCircle } from "lucide-react";
+import logoImg from '../assets/logo.png';
 
 interface Message {
   id: number;
@@ -432,7 +433,7 @@ const AIChat = () => {
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-3">
                 <div className="w-10 h-10 rounded-full overflow-hidden">
-                  <img src="/logo.png" alt="Logo" className="w-full h-full object-cover" />
+                  <img src={logoImg} alt="Logo" className="w-full h-full object-cover" />
                 </div>
                 <div>
                   <h3 className="text-white font-semibold">Umakshi AI Assistant</h3>
