@@ -2,6 +2,7 @@ import React from 'react';
 import { ArrowDown } from 'lucide-react';
 import { useMagnetic } from '../hooks/useMagnetic';
 import profileImg from '../assets/profile.jpg';
+import logoImg from '../assets/logo.png'; // Adjust the path as needed
 
 const Hero = () => {
   const scrollToAbout = () => {
