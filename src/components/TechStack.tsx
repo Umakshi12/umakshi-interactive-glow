@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 
@@ -10,33 +9,38 @@ const TechStack = () => {
   });
 
   const technologies = {
-    "Frontend": [
-      { name: "React", level: 90, color: "from-blue-500 to-cyan-500" },
-      { name: "TypeScript", level: 85, color: "from-blue-600 to-blue-400" },
-      { name: "Next.js", level: 80, color: "from-gray-700 to-gray-500" },
-      { name: "Tailwind CSS", level: 95, color: "from-cyan-500 to-teal-500" },
-      { name: "React Native", level: 75, color: "from-purple-500 to-pink-500" }
+    "Programming Languages": [
+      { name: "Python", level: 95, color: "from-yellow-500 to-orange-500" },
+      { name: "C/C++", level: 80, color: "from-blue-700 to-blue-400" }
     ],
-    "Backend": [
-      { name: "Node.js", level: 88, color: "from-green-600 to-green-400" },
-      { name: "Python", level: 82, color: "from-yellow-500 to-orange-500" },
-      { name: "Express.js", level: 85, color: "from-gray-600 to-gray-400" },
-      { name: "PostgreSQL", level: 80, color: "from-blue-700 to-blue-500" },
-      { name: "MongoDB", level: 78, color: "from-green-700 to-green-500" }
-    ],
-    "AI/ML": [
+    "Libraries & Frameworks": [
+      { name: "Pandas", level: 90, color: "from-green-600 to-green-400" },
+      { name: "Scikit-Learn", level: 88, color: "from-blue-600 to-purple-500" },
+      { name: "Flask", level: 85, color: "from-gray-600 to-gray-400" },
+      { name: "Matplotlib", level: 80, color: "from-orange-600 to-red-500" },
+      { name: "Streamlit", level: 80, color: "from-pink-500 to-purple-400" },
       { name: "TensorFlow", level: 75, color: "from-orange-600 to-red-500" },
-      { name: "OpenAI API", level: 88, color: "from-purple-600 to-purple-400" },
-      { name: "Hugging Face", level: 70, color: "from-yellow-600 to-orange-400" },
-      { name: "Python ML", level: 80, color: "from-blue-600 to-purple-500" },
-      { name: "Data Analysis", level: 85, color: "from-indigo-600 to-purple-500" }
+      { name: "Keras", level: 75, color: "from-pink-600 to-red-400" },
+      { name: "CNN", level: 70, color: "from-purple-600 to-purple-400" },
+      { name: "LangChain", level: 70, color: "from-blue-500 to-cyan-500" },
+      { name: "LangGraph", level: 65, color: "from-gray-700 to-gray-500" }
     ],
-    "Tools & Others": [
-      { name: "Git", level: 90, color: "from-red-600 to-red-400" },
-      { name: "Docker", level: 75, color: "from-blue-500 to-cyan-400" },
-      { name: "AWS", level: 70, color: "from-orange-500 to-yellow-400" },
-      { name: "Firebase", level: 85, color: "from-yellow-500 to-red-500" },
-      { name: "Figma", level: 80, color: "from-purple-500 to-pink-400" }
+    "Prompt Engineering & Agentic AI": [
+      { name: "One shot prompting", level: 85, color: "from-purple-500 to-blue-400" },
+      { name: "Few shot prompting", level: 80, color: "from-pink-500 to-yellow-400" },
+      { name: "DeepSeek r1", level: 70, color: "from-blue-400 to-blue-200" },
+      { name: "Chain-of-Thought (CoT)", level: 70, color: "from-purple-400 to-purple-200" },
+      { name: "Make.com", level: 70, color: "from-green-500 to-green-300" },
+      { name: "n8n", level: 65, color: "from-orange-400 to-yellow-300" },
+      { name: "Multi-modal AI", level: 65, color: "from-cyan-400 to-blue-300" }
+    ],
+    "Tools & Databases": [
+      { name: "Docker", level: 80, color: "from-blue-500 to-cyan-400" },
+      { name: "COMSOL", level: 70, color: "from-blue-600 to-blue-300" },
+      { name: "Android Studio", level: 70, color: "from-green-700 to-green-500" },
+      { name: "Figma", level: 70, color: "from-purple-500 to-pink-400" },
+      { name: "MS Office", level: 80, color: "from-blue-400 to-blue-200" },
+      { name: "MySQL", level: 75, color: "from-blue-700 to-blue-500" }
     ]
   };
 
@@ -48,7 +52,9 @@ const TechStack = () => {
           <div className={`text-center mb-16 transition-all duration-1000 ${
             inView ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-10'
           }`}>
-            <h2 className="text-6xl md:text-7xl font-extralight mb-8 tracking-widest">
+            <h2 className="text-5xl md:text-6xl font-extralight mb-6 tracking-wider">
+            {/* <h2 className="text-6xl md:text-7xl font-extralight mb-8 tracking-widest"> */}
+
               <span className="bg-gradient-to-r from-purple-100 via-gray-100 to-purple-100 bg-clip-text text-transparent">
                 SKILLS
               </span>

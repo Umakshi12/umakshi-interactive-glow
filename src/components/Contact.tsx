@@ -1,6 +1,5 @@
-
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Github, MessageCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, Github, MessageCircle, LinkedinIcon } from 'lucide-react';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -29,26 +28,32 @@ const Contact = () => {
     {
       icon: Mail,
       label: "Email",
-      value: "umakshi@example.com",
-      href: "mailto:umakshi@example.com"
+      value: "umakshisharma08@gmail.com",
+      href: "mailto:umakshisharma08@gmail.com"
     },
-    {
+    /*{
       icon: Phone,
       label: "Phone",
-      value: "+1 (555) 123-4567",
-      href: "tel:+15551234567"
-    },
+      value: "+91 9306774453",
+      href: "tel:+919306774453"
+    },*/
     {
       icon: MapPin,
       label: "Location",
-      value: "San Francisco, CA",
+      value: "Kurukshetra, Haryana, India",
       href: "#"
     },
     {
       icon: Github,
       label: "GitHub",
-      value: "github.com/umakshi",
-      href: "https://github.com/umakshi"
+      value: "github.com/Umakshi12",
+      href: "https://github.com/Umakshi12"
+    },
+    {
+      icon: LinkedinIcon,
+      label: "LinkedIn",
+      value: "linkedin.com/in/umakshi-sharma-163302206",
+      href: "https://www.linkedin.com/in/umakshi-sharma-163302206"
     }
   ];
 
@@ -57,10 +62,10 @@ const Contact = () => {
       <div className="container mx-auto px-6">
         <div className="max-w-6xl mx-auto">
           {/* Section heading */}
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
-            <span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
-              Get In Touch
-            </span>
+          {/* <h2 className="text-5xl md:text-6xl font-extralight mb-16 tracking-wider bg-clip-text text-transparent text-center"> */}
+          {/* <h2 className="text-5xl md:text-6xl font-extralight mb-6 tracking-wider"></h2> */}
+          <h2 className="text-5xl md:text-6xl font-extralight mb-6 tracking-wider bg-gradient-to-r from-gray-200 via-purple-200 to-gray-200 bg-clip-text text-transparent text-center">
+            GET IN TOUCH
           </h2>
 
           <div className="grid lg:grid-cols-2 gap-12">

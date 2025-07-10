@@ -1,4 +1,3 @@
-
 # Umakshi's Portfolio Website
 
 A modern, interactive portfolio website built with React and 3D elements.
@@ -106,6 +105,23 @@ umakshi-interactive-glow/
 - **Three.js** - For 3D graphics
 - **Vite** - For fast development
 
+## ✨ Features
+
+### 🎯 Interactive Trailing Cursor
+The website features a beautiful trailing cursor animation that:
+- **Follows your mouse** with smooth, fluid motion
+- **Creates a trail** of colorful dots that fade as they follow
+- **Changes appearance** when hovering over clickable elements
+- **Auto-hides** after 2 seconds of inactivity for better UX
+- **Responsive design** that works on all screen sizes
+
+**Cursor States:**
+- **Default**: White dot with glowing effect
+- **Hover**: Larger pink dot when over buttons/links
+- **Click**: Smaller yellow dot when clicking
+
+The trailing effect creates multiple dots with different colors (pink, cyan, yellow) that follow your cursor with staggered delays, creating a mesmerizing visual effect.
+
 ## 📝 Need Help?
 
 If you run into any issues:
@@ -117,3 +133,41 @@ If you run into any issues:
 ---
 
 **Happy coding! 🎨✨**
+
+## Portfolio Project: Umakshi Interactive Glow
+
+This website is a personal portfolio project for Umakshi Sharma, designed to showcase skills, experience, and projects in AI, data science, and web development. It features:
+
+- Modern, elegant UI with animated hero section and custom cursor
+- About, Experience, Projects, Tech Stack, Blog, and Contact sections
+- Responsive design with Tailwind CSS
+- Interactive elements and subtle animations
+- Contact form and social links
+
+**Tech Stack:**
+- React (TypeScript)
+- Tailwind CSS
+- Vite
+- Custom hooks and components
+
+This project demonstrates advanced frontend development, UI/UX design, and integration of modern web technologies. Feel free to use or adapt this template for your own portfolio!
+
+---
+
+### Umakshi Interactive Glow (Personal Portfolio Website)
+
+**Description:**
+A modern, interactive portfolio website to showcase my skills, experience, and projects in AI, data science, and web development. Features animated hero section, custom cursor, responsive design, and interactive UI elements.
+
+**Key Features:**
+- Animated hero section and custom cursor
+- About, Experience, Projects, Tech Stack, Blog, and Contact sections
+- Responsive design with Tailwind CSS
+- Subtle animations and interactive elements
+- Contact form and social/social links
+
+**Tech Stack:** React (TypeScript), Tailwind CSS, Vite, Custom hooks/components
+
+**Role:** Designer & Developer
+
+---

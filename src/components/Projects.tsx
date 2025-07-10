@@ -1,108 +1,140 @@
-
 import React from 'react';
 
 const Projects = () => {
   const projects = [
     {
-      title: "AI-Powered E-commerce Platform",
-      description: "A complete e-commerce solution with AI-driven product recommendations, inventory management, and customer analytics.",
-      tech: ["React", "Node.js", "Python", "TensorFlow", "PostgreSQL"],
+      title: "Umakshi Interactive Glow (Portfolio Website)",
+      description: "A modern, interactive portfolio website to showcase my skills, experience, and projects in AI, data science, and web development. Features animated hero section, custom cursor, responsive design, and interactive UI elements.",
+      tech: ["React", "TypeScript", "Tailwind CSS", "Vite"],
       status: "Live",
-      image: "🛒"
+      image: "💡"
     },
     {
-      title: "Real-time Chat Application",
-      description: "Scalable chat application with real-time messaging, file sharing, and video calls using WebRTC.",
-      tech: ["React", "Socket.io", "Express", "MongoDB", "WebRTC"],
-      status: "Live",
-      image: "💬"
+      title: "DRY HERBS – Ayurvedic Herbs Classifier",
+      description: "Collaborated with a PhD scholar to classify Ayurvedic herbs using computer vision (CNN, Django API). Managed dataset collection, preprocessing, augmentation, and model deployment.",
+      tech: ["Python", "CNN", "Django", "Computer Vision", "Data Augmentation"],
+      status: "Major Project",
+      image: "🌿"
     },
     {
-      title: "Task Management Dashboard",
-      description: "Comprehensive project management tool with team collaboration, time tracking, and analytics.",
-      tech: ["React", "TypeScript", "Firebase", "Tailwind CSS"],
-      status: "In Progress",
-      image: "📊"
+      title: "Piezoelectric Energy Harvester (COMSOL)",
+      description: "Modeled and simulated a piezoelectric energy harvesting system using COMSOL Multiphysics. Conducted finite element analysis for design optimization.",
+      tech: ["COMSOL", "Simulation", "Finite Element Analysis"],
+      status: "Minor Project",
+      image: "⚡"
     },
     {
-      title: "Portfolio Website Generator",
-      description: "AI-powered tool that generates personalized portfolio websites based on user data and preferences.",
-      tech: ["Next.js", "OpenAI API", "Prisma", "Tailwind CSS"],
-      status: "Completed",
-      image: "🎨"
-    },
-    {
-      title: "Mobile Fitness Tracker",
-      description: "Cross-platform mobile app for fitness tracking with workout plans and nutrition guidance.",
-      tech: ["React Native", "Firebase", "HealthKit", "Redux"],
-      status: "Live",
-      image: "💪"
-    },
-    {
-      title: "Smart Home IoT Dashboard",
-      description: "IoT dashboard for controlling and monitoring smart home devices with voice commands and automation.",
-      tech: ["React", "IoT", "AWS", "Voice API"],
-      status: "Prototype",
-      image: "🏠"
+      title: "Smart Energy Meter (Arduino)",
+      description: "Designed and developed a smart energy meter system using Arduino UNO, LED display, and optocoupler for accurate monitoring.",
+      tech: ["Arduino", "Embedded Systems", "Electronics"],
+      status: "Mini Project",
+      image: "🔌"
     }
   ];
 
   return (
-    <section id="projects" className="py-20 relative">
-      <div className="container mx-auto px-6">
+    <section id="projects" className="py-20 relative overflow-hidden">
+      {/* Creamy radial gradient background */}
+      <div className="absolute inset-0 z-0" aria-hidden="true">
+        <div
+          style={{
+            width: '100%',
+            height: '100%',
+            position: 'absolute',
+            background: 'radial-gradient(circle at 50% 50%, #fffbe8 0%, #fdf6e3 60%, #f7ecd7 100%)',
+          }}
+        />
+        {/* Wavy SVG overlays */}
+        <svg
+          width="100%"
+          height="100%"
+          viewBox="0 0 1440 320"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          style={{ position: 'absolute', top: 0, left: 0, zIndex: 1 }}
+          preserveAspectRatio="none"
+        >
+          <path
+            d="M0,160 C360,240 1080,80 1440,160 L1440,0 L0,0 Z"
+            fill="url(#wave1)"
+            opacity="0.13"
+          />
+          <defs>
+            <linearGradient id="wave1" x1="0" y1="0" x2="1440" y2="320" gradientUnits="userSpaceOnUse">
+              <stop stopColor="#f7ecd7" />
+              <stop offset="1" stopColor="#fffbe8" />
+            </linearGradient>
+          </defs>
+        </svg>
+        <svg
+          width="100%"
+          height="100%"
+          viewBox="0 0 1440 320"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          style={{ position: 'absolute', bottom: 0, left: 0, zIndex: 1, transform: 'scaleY(-1)' }}
+          preserveAspectRatio="none"
+        >
+          <path
+            d="M0,160 C360,240 1080,80 1440,160 L1440,320 L0,320 Z"
+            fill="url(#wave2)"
+            opacity="0.10"
+          />
+          <defs>
+            <linearGradient id="wave2" x1="0" y1="0" x2="1440" y2="320" gradientUnits="userSpaceOnUse">
+              <stop stopColor="#f7ecd7" />
+              <stop offset="1" stopColor="#fffbe8" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-6xl mx-auto">
           {/* Section heading */}
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
-            <span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-yellow-700 via-yellow-600 to-yellow-700 bg-clip-text text-transparent">
               Projects
             </span>
           </h2>
 
-          {/* Projects grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* Simple grid layout for projects */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.map((project, index) => (
               <div 
                 key={index}
-                className="group relative p-6 rounded-lg bg-gradient-to-br from-gray-800/50 to-gray-900/50 border border-purple-500/20 hover:border-purple-400/40 transition-all duration-300 hover:scale-105 backdrop-blur-sm cursor-pointer"
+                className="group relative flex flex-col justify-between items-center w-full min-h-[320px] p-5 rounded-lg bg-gradient-to-br from-white/80 to-yellow-50/60 border border-yellow-100/80 hover:border-yellow-200/90 transition-all duration-300 hover:scale-105 shadow-md cursor-pointer overflow-hidden"
+                style={{ animationDelay: `${index * 0.2}s` }}
               >
                 {/* Project icon */}
                 <div className="text-4xl mb-4 text-center">{project.image}</div>
-                
                 {/* Status badge */}
                 <div className="absolute top-4 right-4">
                   <span className={`px-2 py-1 text-xs rounded-full font-medium ${
-                    project.status === 'Live' ? 'bg-green-500/20 text-green-400 border border-green-500/30' :
-                    project.status === 'In Progress' ? 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30' :
-                    project.status === 'Completed' ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30' :
-                    'bg-purple-500/20 text-purple-400 border border-purple-500/30'
+                    project.status === 'Live' ? 'bg-green-500/20 text-green-700 border border-green-500/30' :
+                    project.status === 'In Progress' ? 'bg-yellow-500/20 text-yellow-700 border border-yellow-500/30' :
+                    project.status === 'Completed' ? 'bg-blue-500/20 text-blue-700 border border-blue-500/30' :
+                    'bg-yellow-200/40 text-yellow-800 border border-yellow-200/60'
                   }`}>
                     {project.status}
                   </span>
                 </div>
-
-                {/* Project content */}
-                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-purple-400 transition-colors">
+                <h3 className="text-xl font-bold text-black mb-3 group-hover:text-yellow-700 transition-colors text-center">
                   {project.title}
                 </h3>
-                
-                <p className="text-gray-300 mb-4 leading-relaxed text-sm">
+                <p className="text-neutral-800 mb-4 leading-relaxed text-sm text-center break-words">
                   {project.description}
                 </p>
-
-                {/* Tech stack */}
-                <div className="flex flex-wrap gap-1 mb-4">
+                <div className="flex flex-wrap gap-1 mb-4 justify-center">
                   {project.tech.map((tech, techIndex) => (
                     <span 
                       key={techIndex}
-                      className="px-2 py-1 text-xs bg-gradient-to-r from-purple-600/20 to-cyan-600/20 border border-purple-500/20 rounded text-purple-300"
+                      className="px-2 py-1 text-xs bg-gradient-to-r from-yellow-200/40 to-yellow-50/40 border border-yellow-200/40 rounded text-yellow-800"
                     >
                       {tech}
                     </span>
                   ))}
                 </div>
-
-                {/* Hover effect overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-600/10 to-cyan-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg" />
+                <div className="absolute inset-0 bg-gradient-to-br from-yellow-200/10 to-yellow-50/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg" />
               </div>
             ))}
           </div>

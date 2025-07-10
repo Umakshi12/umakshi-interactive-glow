@@ -1,28 +1,41 @@
-
 import React from 'react';
 
 const Experience = () => {
   const experiences = [
     {
-      title: "Senior Full Stack Developer",
-      company: "Tech Innovation Co.",
-      period: "2022 - Present",
-      description: "Leading development of AI-powered web applications using React, Node.js, and Python. Implemented machine learning models for user behavior prediction with focus on elegant, scalable solutions.",
-      skills: ["React", "Node.js", "Python", "AI/ML", "PostgreSQL"]
+      title: "AI Scientist",
+      company: "iAssist Innovations Labs",
+      period: "Apr 2024 – May 2025",
+      description: "Led mICRa product enhancement for ICICI Lombard, automating monitoring, integrating new features, and optimizing reporting with Pandas and Python. Reduced reporting time from 15 to 6 hours via time scheduling, parallel processing, and multithreading. Migrated legacy monolith to scalable, dockerized microservices architecture. Improved prediction accuracy by refining algorithms and data preprocessing.",
+      skills: ["Python", "Flask", "ICR/OCR", "Pandas", "Microservices", "Docker", "Machine Learning", "Model Optimization"]
     },
     {
-      title: "Frontend Developer",
-      company: "Digital Solutions Ltd.",
-      period: "2021 - 2022",
-      description: "Developed responsive web applications and mobile experiences. Collaborated closely with design teams to create intuitive, beautiful user interfaces that prioritize user experience.",
-      skills: ["React", "TypeScript", "Tailwind CSS", "React Native"]
+      title: "Data Scientist Intern",
+      company: "Exposys Data Labs",
+      period: "Apr 2024 – May 2024",
+      description: "Built predictive models for company profits using advanced regression (Linear, Lasso, Ridge, Decision Tree, Random Forest, SVR). Performed EDA, feature engineering, and data visualization (Pandas, NumPy, Seaborn, Matplotlib). Achieved 97.95% accuracy (Linear Regression, MSE, MAE, R²). Deployed models with Streamlit and Flask for real-time prediction; automated ML pipelines for scalable analytics.",
+      skills: ["Python", "Scikit-Learn", "Streamlit", "Flask", "Model Deployment", "ML Pipelines"]
     },
     {
-      title: "Junior Developer",
-      company: "StartUp Ventures",
-      period: "2020 - 2021",
-      description: "Built and maintained web applications in fast-paced startup environment. Gained comprehensive experience in full-stack development and agile methodologies.",
-      skills: ["JavaScript", "HTML/CSS", "Express.js", "MongoDB"]
+      title: "ML Intern",
+      company: "CSIR - CSIO, Chandigarh",
+      period: "Jul 2023 – Sep 2023",
+      description: "Developed AI Car Assistant for vehicle acceleration prediction using Multiple Linear Regression and cross-validation (R² = 0.9574). Applied data mining, visualization, and preprocessing on real-time series datasets.",
+      skills: ["Python", "Regression", "Data Mining", "EDA", "Model Evaluation"]
+    },
+    {
+      title: "Android Developer Intern",
+      company: "OOHR Innovations, UIET KUK",
+      period: "Apr 2023 – Aug 2023",
+      description: "Developed driver's app, designed workflows, and contributed to UI/UX using Kotlin, XML, and Figma.",
+      skills: ["Android Development", "Mobile App Development", "UI/UX Design", "Figma"]
+    },
+    {
+      title: "Subject Matter Expert (Mathematics)",
+      company: "Shadovein",
+      period: "May 2021 – Sep 2021",
+      description: "Provided mathematical solutions for real-world problems; gained experience in documentation and content management.",
+      skills: ["Mathematics", "Quantitative Analysis", "MS Office", "CMS"]
     }
   ];
 
