@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowDown } from 'lucide-react';
 import { useMagnetic } from '../hooks/useMagnetic';
+import profileImg from '../assets/profile.jpg';
 
 const Hero = () => {
   const scrollToAbout = () => {
@@ -122,7 +123,7 @@ const Hero = () => {
             <div className="w-72 h-72 md:w-80 md:h-80 rounded-full bg-black/40 p-1.5 backdrop-blur-sm border border-gray-800/60">
               <div className="w-full h-full rounded-full bg-black/40 flex items-center justify-center backdrop-blur-sm overflow-hidden">
                 <img 
-                  src="../profile.jpg" 
+                  src={profileImg}
                   alt="Umakshi - AI Scientist"
                   className="w-full h-full object-cover rounded-full"
                 />
