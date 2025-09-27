@@ -10,7 +10,7 @@ interface Project {
 }
 
 // The component now accepts the 'projects' prop from your main page
-const Projects = ({ projects }: { projects: Project[] }) => {
+const Projects = ({ projects, loading, error }: { projects: Project[]; loading: boolean; error: string | null }) => {
   return (
     <section id="projects" className="py-20 relative overflow-hidden">
       {/* Your background styles remain unchanged */}
@@ -77,9 +77,13 @@ const Projects = ({ projects }: { projects: Project[] }) => {
             </span>
           </h2>
 
-          {/* Grid layout now maps over the 'projects' prop */}
+          {/* Conditional rendering based on loading, error, and projects existence */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects && projects.length > 0 ? (
+            {loading ? (
+              <p className="text-center col-span-full text-yellow-800">Loading projects...</p>
+            ) : error ? (
+              <p className="text-center col-span-full text-red-600">Error: {error}</p>
+            ) : projects && projects.length > 0 ? (
               projects.map((project, index) => (
                 // The entire card is now a link to the GitHub repo
                 <a
@@ -95,7 +99,7 @@ const Projects = ({ projects }: { projects: Project[] }) => {
 
                   {/* Project Title from GitHub repo name */}
                   <h3 className="text-xl font-bold text-black mb-3 group-hover:text-yellow-700 transition-colors text-center">
-                    {project.name.replace(/[-_]/g, ' ')} {/* Replaces dashes/underscores with spaces */}
+                    {project.name.replace(/[ ]/g, ' ')} {/* Replaces dashes/underscores with spaces */}
                   </h3>
 
                   {/* Project Description from GitHub */}

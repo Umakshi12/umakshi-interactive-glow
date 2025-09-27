@@ -22,43 +22,49 @@ interface Project{
   topics: string[];
 }
 
-export async function getStaticProps(){
-  const username = 'https://github.com/Umakshi12';
-  const token = process.env.GH_PAT;
-
-  const response = await fetch('https://api.github.com/users/${username}/repos',{
-    headers:{
-      // The Authorization header is only added if the token exists
-      ...(token && { Authorization: `token ${token}` }),
-
-    }
-  });
-
-  if (!response.ok){
-    console.error("Failed to fetch GitHub repos.");
-    // Return an empty array if there's an error to prevent the build from failing
-    return { props: { projects: [] } };
-  }
-
-  const repos: Project[] = await response.json();
-
-  // Filter for repos that have the "portfolio" topic
-  const portfolioRepos = repos.filter(repo => repo.topics && repo.topics.includes('portfolio'));
-
-  return {
-    props: {
-      projects: portfolioRepos,
-    },
-    // Optional: Tells Next.js to re-generate the page every hour (3600 seconds)
-    // This allows your portfolio to update without needing a full redeploy.
-    revalidate: 3600,
-  };
-
-
-}
-const Index = ({projects}:{projects:Project[]}) => {
+const Index = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isMouseMoving, setIsMouseMoving] = useState(false);
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [loadingProjects, setLoadingProjects] = useState(true);
+  const [errorProjects, setErrorProjects] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      setLoadingProjects(true);
+      setErrorProjects(null);
+      const username = 'Umakshi12';
+      const token = import.meta.env.VITE_GH_PAT;
+
+      console.log("VITE_GH_PAT:", token ? "****" : "Not set");
+
+      try {
+        const response = await fetch(`https://api.github.com/users/${username}/repos`, {
+          headers: {
+            ...(token && { Authorization: `token ${token}` }),
+          },
+        });
+
+        console.log("GitHub API Response Status:", response.status);
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          throw new Error(`Failed to fetch GitHub repos: ${response.statusText} - ${errorText}`);
+        }
+
+        const repos: Project[] = await response.json();
+        const portfolioRepos = repos.filter(repo => repo.topics && repo.topics.includes('portfolio'));
+        setProjects(portfolioRepos);
+      } catch (err: any) {
+        console.error("Error fetching projects:", err);
+        setErrorProjects(err.message);
+      } finally {
+        setLoadingProjects(false);
+      }
+    };
+
+    fetchProjects();
+  }, []);
 
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;
@@ -103,7 +109,7 @@ const Index = ({projects}:{projects:Project[]}) => {
         <Hero />
         <About />
         <Experience />
-        <Projects projects={projects} />
+        <Projects projects={projects} loading={loadingProjects} error={errorProjects} />
         <TechStack />
         <Blog />
         {/* <Analytics /> */}
