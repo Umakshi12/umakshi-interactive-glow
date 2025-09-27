@@ -27,8 +27,8 @@ jobs:
           # Pass the PAT secret to the build script
           GH_PAT: ${{ secrets.GH_PAT }}
 
-      - name: Deploy to GitHub Pages 🚀
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          # The folder the build script generates
-          folder: out
+      # - name: Deploy to GitHub Pages 🚀
+      #   uses: JamesIves/github-pages-deploy-action@v4
+      #   with:
+      #     # The folder the build script generates
+      #     folder: out
