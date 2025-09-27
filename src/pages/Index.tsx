@@ -13,7 +13,50 @@ import ScrollProgress from '../components/ScrollProgress';
 // import Search from '../components/Search';
 import AIChat from '../components/AIChat';
 
-const Index = () => {
+// Define a type for your project data for better code quality
+interface Project{
+  id: number;
+  name:string;
+  description:string;
+  html_url: string;
+  topics: string[];
+}
+
+export async function getStaticProps(){
+  const username = 'https://github.com/Umakshi12';
+  const token = process.env.GH_PAT;
+
+  const response = await fetch('https://api.github.com/users/${username}/repos',{
+    headers:{
+      // The Authorization header is only added if the token exists
+      ...(token && { Authorization: `token ${token}` }),
+
+    }
+  });
+
+  if (!response.ok){
+    console.error("Failed to fetch GitHub repos.");
+    // Return an empty array if there's an error to prevent the build from failing
+    return { props: { projects: [] } };
+  }
+
+  const repos: Project[] = await response.json();
+
+  // Filter for repos that have the "portfolio" topic
+  const portfolioRepos = repos.filter(repo => repo.topics && repo.topics.includes('portfolio'));
+
+  return {
+    props: {
+      projects: portfolioRepos,
+    },
+    // Optional: Tells Next.js to re-generate the page every hour (3600 seconds)
+    // This allows your portfolio to update without needing a full redeploy.
+    revalidate: 3600,
+  };
+
+
+}
+const Index = ({projects}:{projects:Project[]}) => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isMouseMoving, setIsMouseMoving] = useState(false);
 
@@ -60,7 +103,7 @@ const Index = () => {
         <Hero />
         <About />
         <Experience />
-        <Projects />
+        <Projects projects={projects} />
         <TechStack />
         <Blog />
         {/* <Analytics /> */}
