@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { Calendar, Clock, Eye, ArrowRight } from 'lucide-react';
+import React, { useEffect, useState, useRef } from 'react';
+import { Calendar, Eye, ArrowRight } from 'lucide-react';
+import { initAutoSlider } from '../lib/autoSlider';
 
 // Replace with your Medium username if needed
 const MEDIUM_RSS_URL = 'https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@kaushik.umakshi';
@@ -8,6 +9,8 @@ const Blog = () => {
   const [posts, setPosts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const sliderRef = useRef<HTMLDivElement | null>(null);
+  const cleanupRef = useRef<(() => void) | null>(null);
 
   useEffect(() => {
     setLoading(true);
@@ -27,6 +30,25 @@ const Blog = () => {
         setLoading(false);
       });
   }, []);
+
+  // initialize auto-slider for the blog posts when posts change
+  useEffect(() => {
+    if (!sliderRef.current || posts.length === 0) return;
+    // cleanup previous
+    if (cleanupRef.current) cleanupRef.current();
+
+    const container = sliderRef.current;
+    container.setAttribute('data-auto-slider', 'true');
+
+    // right -> left infinite loop:
+    const cleanup = initAutoSlider(container, { speed: 80, direction: 'left', ensureSeamless: true });
+    cleanupRef.current = cleanup;
+
+    return () => {
+      if (cleanup) cleanup();
+    };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [posts]);
 
   return (
     <section id="blog" className="py-32 relative overflow-hidden">
@@ -98,45 +120,85 @@ const Blog = () => {
             </p>
           </div>
 
-          {/* Blog grid or fallback */}
+          {/* Slider or fallback */}
           {loading ? (
             <div className="text-center text-yellow-700 text-lg py-12">Loading blog posts...</div>
           ) : error ? (
             <div className="text-center text-red-600 text-lg py-12">{error}</div>
           ) : (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {posts.map((post) => (
-                <div
-                  key={post.guid}
-                  className="group relative flex flex-col h-full p-6 rounded-xl bg-gradient-to-br from-white/90 to-yellow-50/70 border border-yellow-100/80 hover:border-yellow-200/90 transition-all duration-300 hover:scale-105 shadow-md"
-                >
-                  <div className="text-4xl mb-4">✍️</div>
-                  <div className="flex items-center space-x-3 text-xs text-neutral-500 mb-2">
-                    <span className="px-2 py-1 bg-yellow-500/20 text-yellow-800 rounded-full">
-                      {post.categories && post.categories.length > 0 ? post.categories[0] : "Medium"}
-                    </span>
-                    <div className="flex items-center space-x-1">
-                      <Calendar size={12} />
-                      <span>{new Date(post.pubDate).toLocaleDateString()}</span>
-                    </div>
-                    <div className="flex items-center space-x-1">
-                      <Eye size={12} />
-                      <span>Medium</span>
-                    </div>
-                  </div>
-                  <h4 className="text-lg font-bold text-yellow-900 mb-2">{post.title}</h4>
-                  <p className="text-neutral-800 mb-4 flex-1" dangerouslySetInnerHTML={{ __html: post.description.split('</p>')[0] + '</p>' }} />
-                  <a
-                    href={post.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center px-4 py-2 bg-yellow-500/80 hover:bg-yellow-600 text-white rounded-full text-sm font-medium transition-all duration-300 mt-auto"
+            <div
+              ref={sliderRef}
+              className="blog-slider w-full overflow-hidden flex items-center"
+              aria-roledescription="auto-slider"
+              // scalable, interchangeable card size:
+              style={
+                {
+                  // card width between 360px and 560px, prefers ~42vw; adjust as needed
+                  '--card-w': 'clamp(360px, 42vw, 560px)',
+                  // INCREASED vertical size so titles and content fit:
+                  // card height between 420px and 840px, prefers ~55vh
+                  '--card-h': 'clamp(420px, 55vh, 840px)',
+                   // keep a minimum slider height to match card height
+                   minHeight: 'var(--card-h)',
+                } as React.CSSProperties
+              }
+            >
+              <div className="slider-track inline-flex gap-12 items-stretch" style={{ alignItems: 'stretch' }}>
+                {posts.map((post) => (
+                  <article
+                    key={post.guid}
+                    role="article"
+                    // enforce uniform scalable size using CSS variable; keep responsive padding
+                    style={
+                      {
+                        width: 'var(--card-w)',
+                        height: 'var(--card-h)',
+                        minWidth: 'var(--card-w)',
+                        minHeight: 'var(--card-h)',
+                      } as React.CSSProperties
+                    }
+                    className={
+                      [
+                        // larger padding to give title/excerpt more vertical room
+                        'flex-shrink-0 group relative flex flex-col p-8 md:p-10 rounded-xl bg-gradient-to-br from-white/90 to-yellow-50/70',
+                        'border border-yellow-100/80 hover:border-yellow-200/90 transition-all duration-300 shadow-md',
+                        // ensure content wraps and does not overflow
+                        'overflow-hidden break-words hyphens-auto'
+                      ].join(' ')
+                    }
                   >
-                    Read More
-                    <ArrowRight className="ml-2" size={16} />
-                  </a>
-                </div>
-              ))}
+                    <div className="text-4xl mb-4">✍️</div>
+                    <div className="flex items-center space-x-3 text-xs text-neutral-500 mb-2 flex-wrap">
+                      <span className="px-2 py-1 bg-yellow-500/20 text-yellow-800 rounded-full">
+                        {post.categories && post.categories.length > 0 ? post.categories[0] : "Medium"}
+                      </span>
+                      <div className="flex items-center space-x-1">
+                        <Calendar size={12} />
+                        <span>{new Date(post.pubDate).toLocaleDateString()}</span>
+                      </div>
+                      <div className="flex items-center space-x-1">
+                        <Eye size={12} />
+                        <span>Medium</span>
+                      </div>
+                    </div>
+                    <h4 className="text-base md:text-lg font-semibold text-yellow-900 mb-4 leading-snug whitespace-normal break-words">
+                      {post.title}
+                    </h4>
+                    <div className="text-neutral-800 mb-4 flex-1 overflow-hidden">
+                      <p className="break-words leading-relaxed" dangerouslySetInnerHTML={{ __html: post.description.split('</p>')[0] + '</p>' }} />
+                    </div>
+                    <a
+                      href={post.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center px-4 py-2 bg-yellow-500/80 hover:bg-yellow-600 text-white rounded-full text-sm font-medium transition-all duration-300 mt-auto"
+                    >
+                      Read More
+                      <ArrowRight className="ml-2" size={16} />
+                    </a>
+                  </article>
+                ))}
+              </div>
             </div>
           )}
         </div>

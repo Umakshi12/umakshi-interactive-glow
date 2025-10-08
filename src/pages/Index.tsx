@@ -12,6 +12,7 @@ import CursorFollower from '../components/CursorFollower';
 import ScrollProgress from '../components/ScrollProgress';
 // import Search from '../components/Search';
 import AIChat from '../components/AIChat';
+import { initAutoSlider } from '@/lib/autoSlider';
 
 // Define a type for your project data for better code quality
 interface Project{
@@ -66,8 +67,45 @@ const Index = () => {
     fetchProjects();
   }, []);
 
+  // Initialize auto-slider for projects after they are loaded into the DOM
   useEffect(() => {
-    let timeoutId: NodeJS.Timeout;
+    if (!projects || projects.length === 0) return;
+
+    // small helper to initialize sliders found inside the projects section
+    const inits: Array<() => void> = [];
+
+    // common selectors: elements inside Projects component can expose data-auto-slider or .projects-slider
+    const selectors = [
+      '#projects [data-auto-slider]',
+      '#projects .projects-slider',
+      '#projects .slider-root',
+      '.projects-slider',
+      '[data-projects-slider]'
+    ];
+
+    const found = new Set<HTMLElement>();
+
+    selectors.forEach((sel) => {
+      document.querySelectorAll<HTMLElement>(sel).forEach((el) => found.add(el));
+    });
+
+    found.forEach((el) => {
+      // default direction left, speed tuned for many project cards
+      const cleanup = initAutoSlider(el, { speed: 90, direction: 'left', ensureSeamless: true });
+      inits.push(cleanup);
+    });
+
+    return () => {
+      inits.forEach((c) => {
+        if (typeof c === 'function') {
+          c();
+        }
+      });
+    };
+  }, [projects]);
+
+  useEffect(() => {
+    let timeoutId: ReturnType<typeof setTimeout>;
 
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });

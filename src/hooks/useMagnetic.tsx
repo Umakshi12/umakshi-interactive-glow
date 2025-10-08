@@ -1,8 +1,8 @@
-import { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 
 export function useMagnetic<T extends HTMLElement = HTMLDivElement>(magneticStrength = 40, glowColor = '#a78bfa') {
   const ref = useRef<T | null>(null);
-  const [style, setStyle] = useState({});
+  const [style, setStyle] = useState<React.CSSProperties>({} as React.CSSProperties);
   useEffect(() => {
     function handleMove(e: MouseEvent) {
       if (!ref.current) return;
@@ -31,4 +31,4 @@ export function useMagnetic<T extends HTMLElement = HTMLDivElement>(magneticStre
     return () => window.removeEventListener('mousemove', handleMove);
   }, [magneticStrength, glowColor]);
   return [ref, style] as const;
-} 
+}
